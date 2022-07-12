@@ -15,10 +15,11 @@ void TestMenu::OnImGuiRender()
 
 void TestMenu::ExitToMenu()
 {
-	if (ImGui::Button("Exit"))
+	if (ImGui::Button("Exit to Menu"))
 	{
 		if(currentTest != this)
 			delete currentTest;
 		currentTest = (Test*)this;
 	}
+	ImGui::Text("%.1f FPS", ImGui::GetIO().Framerate);
 }

@@ -11,11 +11,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\shader.cpp" />
-    <ClCompile Include="src\indexBuffer.cpp" />
-    <ClCompile Include="src\renderer.cpp" />
+    <ClCompile Include="src\cpp\main.cpp" />
+    <ClCompile Include="src\cpp\shader.cpp" />
+    <ClCompile Include="src\cpp\indexBuffer.cpp" />
+    <ClCompile Include="src\cpp\renderer.cpp" />
     <ClCompile Include="src\tests\testClearColor.cpp" />
+    <ClCompile Include="src\tests\testTextrue.cpp" />
     <ClCompile Include="src\vendor\glm\detail\glm.cpp" />
     <ClCompile Include="src\vendor\imgui\imgui.cpp" />
     <ClCompile Include="src\vendor\imgui\imgui_demo.cpp" />
@@ -25,15 +26,16 @@
     <ClCompile Include="src\vendor\imgui\imgui_tables.cpp" />
     <ClCompile Include="src\vendor\imgui\imgui_widgets.cpp" />
     <ClCompile Include="src\vendor\std_image\stb_image.cpp" />
-    <ClCompile Include="src\vertexBuffer.cpp" />
-    <ClCompile Include="src\vertexArray.cpp" />
-    <ClCompile Include="src\textrue.cpp" />
+    <ClCompile Include="src\cpp\vertexBuffer.cpp" />
+    <ClCompile Include="src\cpp\vertexArray.cpp" />
+    <ClCompile Include="src\cpp\textrue.cpp" />
     <ClCompile Include="src\tests\testDrawSqure.cpp" />
     <ClCompile Include="src\tests\testMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\basic.shader" />
     <None Include="res\shaders\testDrawSqure.shader" />
+    <None Include="res\shaders\testDrawTextrue.shader" />
     <None Include="src\vendor\glm\detail\func_common.inl" />
     <None Include="src\vendor\glm\detail\func_common_simd.inl" />
     <None Include="src\vendor\glm\detail\func_exponential.inl" />
@@ -172,10 +174,11 @@
     <None Include="src\vendor\glm\gtx\wrap.inl" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\shader.h" />
-    <ClInclude Include="src\indexBuffer.h" />
-    <ClInclude Include="src\renderer.h" />
+    <ClInclude Include="src\headers\shader.h" />
+    <ClInclude Include="src\headers\indexBuffer.h" />
+    <ClInclude Include="src\headers\renderer.h" />
     <ClInclude Include="src\tests\testClearColor.h" />
+    <ClInclude Include="src\tests\testTextrue.h" />
     <ClInclude Include="src\vendor\glm\common.hpp" />
     <ClInclude Include="src\vendor\glm\detail\compute_common.hpp" />
     <ClInclude Include="src\vendor\glm\detail\compute_vector_relational.hpp" />
@@ -468,11 +471,11 @@
     <ClInclude Include="src\vendor\imgui\imstb_textedit.h" />
     <ClInclude Include="src\vendor\imgui\imstb_truetype.h" />
     <ClInclude Include="src\vendor\std_image\std_image.h" />
-    <ClInclude Include="src\typing.h" />
-    <ClInclude Include="src\vertexBuffer.h" />
-    <ClInclude Include="src\vertexArray.h" />
-    <ClInclude Include="src\vertexBufferLayout.h" />
-    <ClInclude Include="src\textrue.h" />
+    <ClInclude Include="src\headers\typing.h" />
+    <ClInclude Include="src\headers\vertexBuffer.h" />
+    <ClInclude Include="src\headers\vertexArray.h" />
+    <ClInclude Include="src\headers\vertexBufferLayout.h" />
+    <ClInclude Include="src\headers\textrue.h" />
     <ClInclude Include="src\tests\test.h" />
     <ClInclude Include="src\tests\testDrawSqure.h" />
     <ClInclude Include="src\tests\testMenu.h" />
@@ -519,7 +522,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>src;src\vendor;$(SolutionDir)Dependencies\include;$(SolutionDir)Dependencies\glew-2.1.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src\headers;src;src\vendor;$(SolutionDir)Dependencies\include;$(SolutionDir)Dependencies\glew-2.1.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
@@ -538,7 +541,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>src/vendor;$(SolutionDir)Dependencies\include;$(SolutionDir)Dependencies\glew-2.1.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src\headers;src;src\vendor;$(SolutionDir)Dependencies\include;$(SolutionDir)Dependencies\glew-2.1.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>

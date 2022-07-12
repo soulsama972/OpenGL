@@ -1,5 +1,5 @@
 #pragma once
-#include"renderer.h"
+#include "typing.h"
 
 
 class Textrue
@@ -19,7 +19,6 @@ private:
 	uchar* m_LocalBuffer;
 	int m_Width, m_Height, m_BPP;
 	std::string m_FilePath;
-
 
 };
 

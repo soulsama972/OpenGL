@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="src\renderer.cpp" />
-    <ClCompile Include="src\vertexBuffer.cpp" />
-    <ClCompile Include="src\indexBuffer.cpp" />
-    <ClCompile Include="src\vertexArray.cpp" />
-    <ClCompile Include="src\shader.cpp" />
+    <ClCompile Include="src\cpp\renderer.cpp" />
+    <ClCompile Include="src\cpp\vertexBuffer.cpp" />
+    <ClCompile Include="src\cpp\indexBuffer.cpp" />
+    <ClCompile Include="src\cpp\vertexArray.cpp" />
+    <ClCompile Include="src\cpp\shader.cpp" />
     <ClCompile Include="src\vendor\std_image\stb_image.cpp" />
-    <ClCompile Include="src\textrue.cpp" />
+    <ClCompile Include="src\cpp\textrue.cpp" />
     <ClCompile Include="src\vendor\glm\detail\glm.cpp" />
     <ClCompile Include="src\vendor\imgui\imgui.cpp" />
     <ClCompile Include="src\vendor\imgui\imgui_demo.cpp" />
@@ -17,9 +17,10 @@
     <ClCompile Include="src\vendor\imgui\imgui_impl_glfw.cpp" />
     <ClCompile Include="src\vendor\imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="src\tests\testClearColor.cpp" />
-    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\cpp\main.cpp" />
     <ClCompile Include="src\tests\testDrawSqure.cpp" />
     <ClCompile Include="src\tests\testMenu.cpp" />
+    <ClCompile Include="src\tests\testTextrue.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\basic.shader" />
@@ -160,17 +161,18 @@
     <None Include="src\vendor\glm\gtx\vector_query.inl" />
     <None Include="src\vendor\glm\gtx\wrap.inl" />
     <None Include="res\shaders\testDrawSqure.shader" />
+    <None Include="res\shaders\testDrawTextrue.shader" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\renderer.h" />
-    <ClInclude Include="src\vertexBuffer.h" />
-    <ClInclude Include="src\indexBuffer.h" />
-    <ClInclude Include="src\vertexArray.h" />
-    <ClInclude Include="src\vertexBufferLayout.h" />
-    <ClInclude Include="src\shader.h" />
-    <ClInclude Include="src\typing.h" />
+    <ClInclude Include="src\headers\renderer.h" />
+    <ClInclude Include="src\headers\vertexBuffer.h" />
+    <ClInclude Include="src\headers\indexBuffer.h" />
+    <ClInclude Include="src\headers\vertexArray.h" />
+    <ClInclude Include="src\headers\vertexBufferLayout.h" />
+    <ClInclude Include="src\headers\shader.h" />
+    <ClInclude Include="src\headers\typing.h" />
     <ClInclude Include="src\vendor\std_image\std_image.h" />
-    <ClInclude Include="src\textrue.h" />
+    <ClInclude Include="src\headers\textrue.h" />
     <ClInclude Include="src\vendor\glm\detail\_features.hpp" />
     <ClInclude Include="src\vendor\glm\detail\_fixes.hpp" />
     <ClInclude Include="src\vendor\glm\detail\_noise.hpp" />
@@ -466,6 +468,7 @@
     <ClInclude Include="src\tests\testClearColor.h" />
     <ClInclude Include="src\tests\testDrawSqure.h" />
     <ClInclude Include="src\tests\testMenu.h" />
+    <ClInclude Include="src\tests\testTextrue.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="src\vendor\glm\CMakeLists.txt" />

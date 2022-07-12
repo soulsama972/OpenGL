@@ -1,17 +1,24 @@
-#include "vertexArray.h"
+#pragma once
+#include"vertexBuffer.h"
 #include"vertexBufferLayout.h"
-#include"renderer.h"
-VertexArray::VertexArray()
-{
-	GLCall(glGenVertexArrays(1, &m_rendererID));
-}
 
-VertexArray::~VertexArray()
+class VertexArray
 {
-	GLCall(glDeleteVertexArrays(1,&m_rendererID));
-}
+public:
+	VertexArray();
+	~VertexArray();
 
-void VertexArray::AddBuffer(const VertexBuffer& vb, const VertexBufferLayout& layout)
+	template<typename T>
+	void AddBuffer(const VertexBuffer<T>& vb, const VertexBufferLayout& layout);
+
+	void Bind() const;
+	void UnBind() const;
+private:
+	uint m_rendererID;
+};
+
+template<typename T>
+inline void VertexArray::AddBuffer(const VertexBuffer<T>& vb, const VertexBufferLayout& layout)
 {
 	Bind();
 	vb.Bind();
@@ -26,12 +33,3 @@ void VertexArray::AddBuffer(const VertexBuffer& vb, const VertexBufferLayout& la
 	}
 }
 
-void VertexArray::Bind()const
-{
-	GLCall(glBindVertexArray(m_rendererID));
-}
-
-void VertexArray::UnBind() const
-{
-	GLCall(glBindVertexArray(0));
-}

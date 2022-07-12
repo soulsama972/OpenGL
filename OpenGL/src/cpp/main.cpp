@@ -25,12 +25,16 @@
 // test case
 #include"tests/testClearColor.h"
 #include"tests/testDrawSqure.h"
+#include"tests/testTextrue.h"
 #include"tests/testMenu.h"
 
 int main(void)
 {
     GLFWwindow* window;
-    /* Initialize the library */
+    Renderer renderer;
+    Test* currentTest = nullptr;
+    TestMenu menu(currentTest);
+
     if (!glfwInit())
         return -1;
 
@@ -38,14 +42,12 @@ int main(void)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    /* Create a windowed mode window and its OpenGL context */
     window = glfwCreateWindow(1600, 900, "Hello World", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
         return -1;
     }
-    /* Make the window's context current */
     glfwMakeContextCurrent(window);
 
     if (GLEW_OK != glewInit())
@@ -58,18 +60,15 @@ int main(void)
 
     GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
     GLCall(glEnable(GL_BLEND));
-    {
-        Renderer renderer;
-        Test* currentTest = nullptr;
-        TestMenu menu(currentTest);
-        currentTest = &menu;
-        menu.RegisterTest<TestClearColor>("clearColor");
-        menu.RegisterTest<TestDrawSqure>("DrawSqure");
 
+    menu.RegisterTest<TestClearColor>("clearColor");
+    menu.RegisterTest<TestDrawSqure>("DrawSqure");
+    menu.RegisterTest<TestTextrue2D>("testDrawTextrue");
+    currentTest = &menu;
+    {
         while (!glfwWindowShouldClose(window))
         {
             renderer.Clear();
-
             currentTest->ImGuiBegin();
             if (currentTest)
             {
@@ -80,16 +79,14 @@ int main(void)
             menu.ExitToMenu();
             currentTest->ImGuiEnd();
 
-
             glfwSwapBuffers(window);
-
             glfwPollEvents();
         }
     }
-    // Cleanup
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
     glfwTerminate();
+
     return 0;
 }

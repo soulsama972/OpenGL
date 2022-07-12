@@ -1,6 +1,14 @@
 #pragma once
 
+#include"shader.h"
+#include"textrue.h"
 #include"renderer.h"
+#include"vertexArray.h"
+#include"indexBuffer.h"
+#include"vertexBuffer.h"
+#include"vertexBufferLayout.h"
+
+
 // imgui
 #include"imgui/imgui.h"
 #include"imgui/imgui_impl_glfw.h"

@@ -2,11 +2,6 @@
 
 #include"tests/test.h"
 
-#include"shader.h"
-#include"vertexArray.h"
-#include"indexBuffer.h"
-#include"vertexBuffer.h"
-#include"vertexBufferLayout.h"
 class TestDrawSqure : public Test
 {
 public:
@@ -17,10 +12,17 @@ public:
 	void OnImGuiRender() override;
 
 private:
+	void AddSqure();
+	void UpdateSqure();
+	struct v
+	{
+		float pos[8];
+	};
 	VertexArray *va;
-	VertexBuffer *vb;
+	VertexBuffer<v> *vb;
 	IndexBuffer *ib;
 	Shader *shader;
 	float color[4];
+	v temp;
 };
 

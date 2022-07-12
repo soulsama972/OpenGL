@@ -1,19 +1,6 @@
 #include "renderer.h"
 
-void GLClearError()
-{ 
-    while (glGetError() != GL_NO_ERROR); 
-}
 
-bool GLLogCall(const char* function, const char* file, const int line)
-{
-    while (GLenum error = glGetError())
-    {
-        std::cout << "gl error: " << error << ": " << function << " " << file << ":" << line << std::endl;
-        return false;
-    }
-    return true;
-}
 
 void Renderer::Draw(const VertexArray& va, const IndexBuffer& ib, const Shader& shader) const
 {
