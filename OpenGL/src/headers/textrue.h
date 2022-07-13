@@ -11,14 +11,15 @@ public:
 	void Bind(uint slot = 0) const;
 	void UnBind() const;
 
-	inline int GetWidth() const { return m_Width; }
-	inline int GetHeight() const { return m_Height; }
+	inline int GetWidth() const { return width; }
+	inline int GetHeight() const { return height; }
 
 private:
-	uint m_Renderer;
-	uchar* m_LocalBuffer;
-	int m_Width, m_Height, m_BPP;
-	std::string m_FilePath;
+	uint renderer;
+	uchar* localBuffer;
+	int width, height, BPP;
+	std::string filePath;
+	bool mutable isBind;
 
 };
 

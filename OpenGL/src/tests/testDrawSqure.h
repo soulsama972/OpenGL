@@ -18,11 +18,10 @@ private:
 	{
 		float pos[8];
 	};
-	VertexArray *va;
-	VertexBuffer<v> *vb;
-	IndexBuffer *ib;
+	Mesh<v> mesh;
 	Shader *shader;
 	float color[4];
 	v temp;
+	uint index;
 };
 

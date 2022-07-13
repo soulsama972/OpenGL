@@ -1,47 +1,54 @@
 #include "testDrawSqure.h"
 
+float pos[] =
+{
+	-0.5f,  0.5f,
+	-0.5f, -0.5f,
+	 0.5f, -0.5f,
+	 0.5f,  0.5f
+
+};
+
+unsigned int indices[] =
+{
+	0,1,2,
+	0,2,3
+};
+
+
+
 TestDrawSqure::TestDrawSqure() :color { 255.0f, 255.0f, 255.0f, 255.0f }
 {
-	float pos[] =
-	{
-		-0.5f,  0.5f,
-		-0.5f, -0.5f,
-		 0.5f, -0.5f,
-		 0.5f,  0.5f
-
-	};
 	memcpy(temp.pos, pos, sizeof(temp));
-
-	vb = new VertexBuffer<v>(nullptr, 0,sizeof(v) * 100, true);
-	va = new VertexArray();
-	ib = new IndexBuffer(nullptr, 0, 100 * sizeof(uint), true);
+	index = 0;
 	shader = new Shader("res/shaders/testDrawSqure.shader");
 	VertexBufferLayout layout;
 	layout.Push<float>(2);
-	va->AddBuffer(*vb, layout);
-	va->Bind();
-	shader->Bind();
+	mesh.Init(layout, 6, 4, 10);
+	AddSqure();
 }
 
 TestDrawSqure::~TestDrawSqure()
 {
-	delete vb;
-	delete va;
-	delete ib;
 	delete shader;
 }
 
 void TestDrawSqure::OnRender()
 {
+	mesh.Bind();
+	shader->Bind();
 	shader->SetUniform4f("u_Color", color[0], color[1], color[2], color[3]);
-	renderer.Draw(*va, *ib, *shader);
+	renderer.Draw(mesh.GetVertexArray(), mesh.GetIndexBuffer(), mesh.GetVertexBuffer(), *shader);
 }
 
 void TestDrawSqure::OnImGuiRender()
 {
 	ImGui::ColorEdit4("change Color", color);
 	if (ImGui::Button("add Squre", { 100,20 }))
+	{
 		AddSqure();
+		index++;
+	}
 
 
 	if(ImGui::SliderFloat2("point A", &temp.pos[0], -1.0f, 1.0f))
@@ -56,18 +63,11 @@ void TestDrawSqure::OnImGuiRender()
 
 void TestDrawSqure::AddSqure()
 {
-
-	unsigned int indices[] =
-	{
-		0,1,2,
-		0,2,3
-	};
-	vb->AppendData(&temp, 1);
-	ib->Append(indices,6);
-
+	mesh.GetVertexBuffer().AppendData((v*)& pos, 1);
+	mesh.GetIndexBuffer().Append(indices, 6);
 }
 
 void TestDrawSqure::UpdateSqure()
 {
-	vb->UpdateData(&temp, 0, 1);
+	mesh.GetVertexBuffer().UpdateData(&temp, index, 1);
 }

@@ -21,6 +21,8 @@
     <ClCompile Include="src\tests\testDrawSqure.cpp" />
     <ClCompile Include="src\tests\testMenu.cpp" />
     <ClCompile Include="src\tests\testTextrue.cpp" />
+    <ClCompile Include="src\cpp\objLoader.cpp" />
+    <ClCompile Include="src\tests\testDrawModel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\basic.shader" />
@@ -162,6 +164,7 @@
     <None Include="src\vendor\glm\gtx\wrap.inl" />
     <None Include="res\shaders\testDrawSqure.shader" />
     <None Include="res\shaders\testDrawTextrue.shader" />
+    <None Include="res\shaders\testDrawModel.shader" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\headers\renderer.h" />
@@ -469,6 +472,9 @@
     <ClInclude Include="src\tests\testDrawSqure.h" />
     <ClInclude Include="src\tests\testMenu.h" />
     <ClInclude Include="src\tests\testTextrue.h" />
+    <ClInclude Include="src\headers\mesh.h" />
+    <ClInclude Include="src\headers\objLoader.h" />
+    <ClInclude Include="src\tests\testDrawModel.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="src\vendor\glm\CMakeLists.txt" />

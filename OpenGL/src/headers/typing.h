@@ -28,5 +28,7 @@ inline bool GLLogCall(const char* function, const char* file, const int line)
     return true;
 }
 
+
+using ulong = unsigned long long;
 using uint = unsigned int;
 using uchar = unsigned char;

@@ -2,38 +2,45 @@
 
 #include"std_image/std_image.h"
 
-Textrue::Textrue(const std::string& path) : m_FilePath(path), m_LocalBuffer(nullptr), m_Width(0), m_Height(0), m_BPP(0)
+Textrue::Textrue(const std::string& path) : filePath(path), localBuffer(nullptr), width(0), height(0), BPP(0), isBind(false)
 {
-
 	stbi_set_flip_vertically_on_load(1);
-	m_LocalBuffer = stbi_load(path.c_str(), &m_Width, &m_Height, &m_BPP, 4);
+	localBuffer = stbi_load(path.c_str(), &width, &height, &BPP, 4);
 
-	GLCall(glGenTextures(1, &m_Renderer));
-	GLCall(glBindTexture(GL_TEXTURE_2D, m_Renderer));
+	GLCall(glGenTextures(1, &renderer));
+	GLCall(glBindTexture(GL_TEXTURE_2D, renderer));
 
 	GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
 	GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
 	GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP));
 	GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP));
 
-	GLCall(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, m_Width, m_Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, m_LocalBuffer));
+	GLCall(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, localBuffer));
 	
-	if (m_LocalBuffer)
-		stbi_image_free(m_LocalBuffer);
+	if (localBuffer)
+		stbi_image_free(localBuffer);
 }
 
 Textrue::~Textrue()
 {
-	GLCall(glDeleteTextures(1, &m_Renderer));
+	GLCall(glDeleteTextures(1, &renderer));
 }
 
 void Textrue::Bind(uint slot) const
 {
-	GLCall(glActiveTexture(GL_TEXTURE0 + slot));
-	GLCall(glBindTexture(GL_TEXTURE_2D, m_Renderer));
+	if (!isBind)
+	{
+		GLCall(glActiveTexture(GL_TEXTURE0 + slot));
+		GLCall(glBindTexture(GL_TEXTURE_2D, renderer));
+		isBind = true;
+	}
 }
 
 void Textrue::UnBind() const
 {
-	GLCall(glBindTexture(GL_TEXTURE_2D, 0));
+	if (isBind)
+	{
+		GLCall(glBindTexture(GL_TEXTURE_2D, 0));
+		isBind = false;
+	}
 }

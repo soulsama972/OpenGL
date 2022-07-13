@@ -12,7 +12,7 @@
 #include"indexBuffer.h"
 #include"vertexBuffer.h"
 #include"vertexBufferLayout.h"
-
+#include"objLoader.h"
 // math
 #include"glm/glm.hpp"
 #include"glm/gtc/matrix_transform.hpp"
@@ -23,11 +23,11 @@
 #include"imgui/imgui_impl_opengl3.h"
 
 // test case
-#include"tests/testClearColor.h"
-#include"tests/testDrawSqure.h"
-#include"tests/testTextrue.h"
 #include"tests/testMenu.h"
-
+#include"tests/testTextrue.h"
+#include"tests/testDrawSqure.h"
+#include"tests/testDrawModel.h"
+#include"tests/testClearColor.h"
 int main(void)
 {
     GLFWwindow* window;
@@ -42,7 +42,7 @@ int main(void)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    window = glfwCreateWindow(1600, 900, "Hello World", NULL, NULL);
+    window = glfwCreateWindow(1920, 1080, "Hello World", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -61,10 +61,20 @@ int main(void)
     GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
     GLCall(glEnable(GL_BLEND));
 
+    //GLCall(glEnable(GL_CULL_FACE));
+    //GLCall(glEnable(GL_DEPTH_TEST));
+    //GLCall(glDepthFunc(GL_LEQUAL));
+
+
     menu.RegisterTest<TestClearColor>("clearColor");
     menu.RegisterTest<TestDrawSqure>("DrawSqure");
     menu.RegisterTest<TestTextrue2D>("testDrawTextrue");
+    menu.RegisterTest<TestDrawModel>("testDrawModel");
     currentTest = &menu;
+    currentTest = new TestDrawModel();
+
+
+    int x = 1;
     {
         while (!glfwWindowShouldClose(window))
         {

@@ -14,7 +14,8 @@ public:
 	void Bind() const;
 	void UnBind() const;
 private:
-	uint m_rendererID;
+	uint rendererID;
+	mutable bool isBind;
 };
 
 template<typename T>

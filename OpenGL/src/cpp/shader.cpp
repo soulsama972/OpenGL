@@ -1,31 +1,45 @@
 #include "shader.h"
 #include"renderer.h"
 
-Shader::Shader(const std::string& filePath) : m_filePath(filePath), m_RendererID(0) 
+Shader::Shader(const std::string& filePath) : filePath(filePath), rendererID(0),isBind(false)
 {
     ShaderSource source = ParseShader(filePath);
-    m_RendererID = CreateShader(source.vertexSrc, source.framgentSrc);
+    rendererID = CreateShader(source.vertexSrc, source.framgentSrc);
 }
 
 Shader::~Shader()
 {
-    GLCall(glDeleteProgram(m_RendererID));
+    GLCall(glDeleteProgram(rendererID));
 }
 
 void Shader::Bind() const
 {
-    GLCall(glUseProgram(m_RendererID));
+    if (!isBind)
+    {
+        GLCall(glUseProgram(rendererID));
+        isBind = true;
+    }
 }
 
 void Shader::UnBind() const
 {
-    GLCall(glUseProgram(0));
+    if (isBind)
+    {
+        GLCall(glUseProgram(0));
+        isBind = false;
+    }
 }
 
 void Shader::SetUniform1i(const std::string& name, int val)
 {
     GLCall(glUniform1i(GetUniformLocation(name), val));
 }
+
+void Shader::SetUniform1iv(const std::string& name, uint count, int* val)
+{
+    GLCall(glUniform1iv(GetUniformLocation(name), count, val));
+}
+
 
 void Shader::SetUniform1f(const std::string& name, float val)
 {
@@ -43,6 +57,7 @@ void Shader::SetUniform4f(const std::string& name, float v0, float v1, float v2,
 
 void Shader::SetUniformMat4f(const std::string& name, const glm::mat4& mat)
 {
+
     GLCall(glUniformMatrix4fv(GetUniformLocation(name),1, GL_FALSE, &mat[0][0]));
 }
 
@@ -51,7 +66,7 @@ int Shader::GetUniformLocation(const std::string& name) const
     if (m_Cache.find(name) != m_Cache.end())
         return m_Cache[name];
 
-    GLCall(int location = glGetUniformLocation(m_RendererID, name.c_str()));
+    GLCall(int location = glGetUniformLocation(rendererID, name.c_str()));
     if (location == -1)
         std::cout << "Warning: uniform " << name << " doesnt exist!" << std::endl;
     m_Cache[name] = location;

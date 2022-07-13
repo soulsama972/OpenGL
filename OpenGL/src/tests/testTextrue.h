@@ -1,6 +1,5 @@
 #include"test.h"
-#include"glm/glm.hpp"
-#include"glm/gtc/matrix_transform.hpp"
+
 
 
 
@@ -13,18 +12,23 @@ public:
 	void OnRender() override;
 	void OnImGuiRender() override;
 
+	void AddTextrue(glm::vec3 pos, float  i);
+	void UpdateTextrue(uint index, glm::vec2 pos);
+
 private:
 	struct v
 	{
-		float v[16];
+		glm::vec2 pos;
+		glm::vec2 tex;
+		glm::vec3 transalte;
+		float index;
 	};
 
-	VertexArray* va;
-	VertexBuffer<v>* vb;
-	IndexBuffer* ib;
+	Mesh<v> mesh;
 	Shader* shader;
-	Textrue* tex;
+	Textrue* tex, *tex2;
 
 	glm::mat4 view, proj;
 	glm::vec3 t1, t2;
+	uint index;
 };
