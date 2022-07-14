@@ -4,8 +4,8 @@
 TestTextrue2D::TestTextrue2D() : t1(100, 100, 0), t2(300, 200, 0)
 {
 	srand(time(0));
-	tex = new Textrue("res/textures/goku.png");
-	tex2 = new Textrue("res/textures/goku2.png");
+	tex = new Texture("res/textures/goku.png");
+	tex2 = new Texture("res/textures/goku2.png");
 	shader = new Shader("res/shaders/testDrawTextrue.shader");
 	index = 0;
 	VertexBufferLayout layout;

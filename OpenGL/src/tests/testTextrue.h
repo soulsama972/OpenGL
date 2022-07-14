@@ -26,7 +26,7 @@ private:
 
 	Mesh<v> mesh;
 	Shader* shader;
-	Textrue* tex, *tex2;
+	Texture* tex, *tex2;
 
 	glm::mat4 view, proj;
 	glm::vec3 t1, t2;

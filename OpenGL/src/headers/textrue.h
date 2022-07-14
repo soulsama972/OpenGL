@@ -2,11 +2,11 @@
 #include "typing.h"
 
 
-class Textrue
+class Texture
 {
 public:
-	Textrue(const std::string& path);
-	~Textrue();
+	Texture(const std::string& path);
+	~Texture();
 
 	void Bind(uint slot = 0) const;
 	void UnBind() const;

@@ -55,8 +55,8 @@ inline void Mesh<T>::Init(const VertexBufferLayout& layout, uint indicesPerVerte
 template<typename T>
 inline void Mesh<T>::Init(const T* vData, uint vCount, const uint* iData, uint iCount, const VertexBufferLayout& layout, uint indicesPerVertex, uint vertexPerMesh, uint meshCount)
 {
+	ib.Init(iData, iCount, sizeof(uint) * meshCount * indicesPerVertex, true);
 	vb.Init(vData, vCount, sizeof(T) * meshCount * vertexPerMesh, true);
-	ib.Init(iData, iCount, meshCount * sizeof(uint) * indicesPerVertex, true);
 	va.AddBuffer(vb, layout);
 }
 

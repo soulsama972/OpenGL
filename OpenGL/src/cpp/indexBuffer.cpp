@@ -19,14 +19,13 @@ IndexBuffer::~IndexBuffer()
 
 void IndexBuffer::Init(const uint* data, uint count, uint alloctionSize, bool dynamicDraw)
 {
-    this->currentCount = count;
-    this->alloctionSize = alloctionSize;
-    this->isBind = false;
-
     GLCall(glGenBuffers(1, &rendererID));
     GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, rendererID));
     GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, alloctionSize, data, dynamicDraw ? GL_DYNAMIC_DRAW : GL_STATIC_DRAW));
 
+    this->currentCount = count;
+    this->alloctionSize = alloctionSize;
+    this->isBind = false;
 }
 
 

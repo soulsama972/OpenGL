@@ -12,7 +12,6 @@
 #include"indexBuffer.h"
 #include"vertexBuffer.h"
 #include"vertexBufferLayout.h"
-#include"objLoader.h"
 // math
 #include"glm/glm.hpp"
 #include"glm/gtc/matrix_transform.hpp"
@@ -28,9 +27,11 @@
 #include"tests/testDrawSqure.h"
 #include"tests/testDrawModel.h"
 #include"tests/testClearColor.h"
+
+GLFWwindow* window;
+
 int main(void)
 {
-    GLFWwindow* window;
     Renderer renderer;
     Test* currentTest = nullptr;
     TestMenu menu(currentTest);
@@ -64,7 +65,7 @@ int main(void)
     //GLCall(glEnable(GL_CULL_FACE));
     //GLCall(glEnable(GL_DEPTH_TEST));
     //GLCall(glDepthFunc(GL_LEQUAL));
-
+    glEnable(GL_DEPTH_TEST);
 
     menu.RegisterTest<TestClearColor>("clearColor");
     menu.RegisterTest<TestDrawSqure>("DrawSqure");
@@ -73,16 +74,21 @@ int main(void)
     currentTest = &menu;
     currentTest = new TestDrawModel();
 
-
-    int x = 1;
+ 
+    float deltaTime = 0.0f;
+    float lastFrame = 0.0f;
     {
         while (!glfwWindowShouldClose(window))
         {
+            float currentFrame = static_cast<float>(glfwGetTime());
+            deltaTime = currentFrame - lastFrame;
+            lastFrame = currentFrame;
+
             renderer.Clear();
             currentTest->ImGuiBegin();
             if (currentTest)
             {
-                currentTest->OnUpdate(0.0f);
+                currentTest->OnUpdate(deltaTime);
                 currentTest->OnRender();
                 currentTest->OnImGuiRender();
             }

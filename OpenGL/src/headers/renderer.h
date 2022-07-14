@@ -27,12 +27,13 @@ inline void Renderer::Draw(const VertexArray& va, const IndexBuffer& ib, const V
     ib.Bind();
 
     uint indicesCount = ib.GetCount();
-    if (indicesCount)
+    uint verticesCount = vb.GetCount();
+    if (indicesCount && indicesCount != verticesCount)
     {
         GLCall(glDrawElements(GL_TRIANGLES, ib.GetCount(), GL_UNSIGNED_INT, nullptr));
     }
     else
     {
-        GLCall(glDrawArrays(GL_TRIANGLES, 0, vb.GetCount()));
+        GLCall(glDrawArrays(GL_TRIANGLES, 0, verticesCount));
     }
 }

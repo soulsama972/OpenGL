@@ -21,7 +21,6 @@
     <ClCompile Include="src\tests\testDrawSqure.cpp" />
     <ClCompile Include="src\tests\testMenu.cpp" />
     <ClCompile Include="src\tests\testTextrue.cpp" />
-    <ClCompile Include="src\cpp\objLoader.cpp" />
     <ClCompile Include="src\tests\testDrawModel.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -473,7 +472,6 @@
     <ClInclude Include="src\tests\testMenu.h" />
     <ClInclude Include="src\tests\testTextrue.h" />
     <ClInclude Include="src\headers\mesh.h" />
-    <ClInclude Include="src\headers\objLoader.h" />
     <ClInclude Include="src\tests\testDrawModel.h" />
   </ItemGroup>
   <ItemGroup>
