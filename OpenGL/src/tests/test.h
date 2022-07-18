@@ -1,6 +1,7 @@
 #pragma once
 
 #include"mesh.h"
+#include"input.h"
 #include"shader.h"
 #include"textrue.h"
 #include"renderer.h"

@@ -38,6 +38,6 @@ private:
 	uint rendererID;
 	std::string filePath;
 	mutable std::unordered_map<std::string, uint> m_Cache;
-	mutable bool isBind;
+	static uint bindId;
 };
 

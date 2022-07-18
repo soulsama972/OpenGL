@@ -1,7 +1,9 @@
 #include "shader.h"
 #include"renderer.h"
 
-Shader::Shader(const std::string& filePath) : filePath(filePath), rendererID(0),isBind(false)
+uint Shader::bindId = INVALID_ID;
+
+Shader::Shader(const std::string& filePath) : filePath(filePath), rendererID(0)
 {
     ShaderSource source = ParseShader(filePath);
     rendererID = CreateShader(source.vertexSrc, source.framgentSrc);
@@ -9,24 +11,28 @@ Shader::Shader(const std::string& filePath) : filePath(filePath), rendererID(0),
 
 Shader::~Shader()
 {
-    GLCall(glDeleteProgram(rendererID));
+    if (rendererID != INVALID_ID)
+    {
+        UnBind();
+        GLCall(glDeleteProgram(rendererID));
+    }
 }
 
 void Shader::Bind() const
 {
-    if (!isBind)
+    if (rendererID != bindId)
     {
         GLCall(glUseProgram(rendererID));
-        isBind = true;
+        bindId = rendererID;
     }
 }
 
 void Shader::UnBind() const
 {
-    if (isBind)
+    if (bindId == rendererID)
     {
         GLCall(glUseProgram(0));
-        isBind = false;
+        bindId = INVALID_ID;
     }
 }
 

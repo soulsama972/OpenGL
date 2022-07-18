@@ -14,9 +14,27 @@ TestTextrue2D::TestTextrue2D() : t1(100, 100, 0), t2(300, 200, 0)
 	layout.Push<float>(2);
 	layout.Push<float>(3);
 	layout.Push<float>(1);
-	mesh.Init(layout, 6,4, 100000);
-	for (uint i = 0; i < 100000; i++)
-		AddTextrue(glm::vec3(float(rand() % 10000), float(rand() % 10000), rand() % 100 ), rand() % 2);
+
+	v p[] =
+	{
+		{{-50.f, -50.0f}, {0.0f, 0.0f},{0,0,0},1}, // 0
+		{{ 50.f, -50.0f}, {1.0f, 0.0f},{0,0,0},1}, // 1
+		{{ 50.f,  50.0f}, {1.0f, 1.0f},{0,0,0},1}, // 2
+		{{-50.f,  50.0f}, {0.0f, 1.0f},{0,0,0},1}, // 3
+	};
+
+	uint ii[] =
+	{
+		0 ,1 ,2 ,
+		2 ,3 ,0
+	};
+	mesh.Init(p, 4, ii, 6, layout, 6, 4, 1, true);
+
+
+
+	//mesh.Init(layout, 6,4, 100000);
+	//for (uint i = 0; i < 100000; i++)
+	//	AddTextrue(glm::vec3(float(rand() % 10000), float(rand() % 10000), rand() % 100 ), rand() % 2);
 
 	int order[] = { 0,1 };
 	shader->Bind();
@@ -35,13 +53,12 @@ TestTextrue2D::~TestTextrue2D()
 void TestTextrue2D::OnRender()
 {
 	renderer.Clear(0.3f, 0.5f, 0.6f, 0.4f);
-	mesh.Bind();
 	shader->Bind();
 	tex->Bind();
 	tex2->Bind(1);
 
 	shader->SetUniformMat4f("u_MVP", proj * view * glm::translate(glm::mat4(1), t1));
-	renderer.Draw(mesh.GetVertexArray(), mesh.GetIndexBuffer(), mesh.GetVertexBuffer(), *shader);
+	mesh.Draw();
 
 }
 
@@ -67,8 +84,7 @@ void TestTextrue2D::AddTextrue(glm::vec3 pos, float  i)
 		2 + index,3 + index,0 + index
 	};
 
-	mesh.GetVertexBuffer().AppendData((v*)&p, 4);
-	mesh.GetIndexBuffer().Append(ii, 6);
+	mesh.Append((v*)&p, 4, ii, 6);
 	index += 4;
 }
 

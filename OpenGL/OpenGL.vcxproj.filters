@@ -22,6 +22,11 @@
     <ClCompile Include="src\tests\testMenu.cpp" />
     <ClCompile Include="src\tests\testTextrue.cpp" />
     <ClCompile Include="src\tests\testDrawModel.cpp" />
+    <ClCompile Include="src\cpp\model.cpp" />
+    <ClCompile Include="src\cpp\camera.cpp" />
+    <ClCompile Include="src\cpp\window.cpp" />
+    <ClCompile Include="src\cpp\input.cpp" />
+    <ClCompile Include="src\cpp\timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\basic.shader" />
@@ -473,6 +478,11 @@
     <ClInclude Include="src\tests\testTextrue.h" />
     <ClInclude Include="src\headers\mesh.h" />
     <ClInclude Include="src\tests\testDrawModel.h" />
+    <ClInclude Include="src\headers\model.h" />
+    <ClInclude Include="src\headers\camera.h" />
+    <ClInclude Include="src\headers\window.h" />
+    <ClInclude Include="src\headers\input.h" />
+    <ClInclude Include="src\headers\timer.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="src\vendor\glm\CMakeLists.txt" />

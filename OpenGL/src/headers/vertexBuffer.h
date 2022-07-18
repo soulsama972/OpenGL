@@ -13,14 +13,17 @@ public:
 	}
 	~VertexBuffer()
 	{
-		if (rendererID != 0xDEADBF)
+		if (rendererID != INVALID_ID)
+		{
+			UnBind();
 			GLCall(glDeleteBuffers(1, &rendererID));
+		}
 	}
 	void Init(const T* data, uint count, uint alloctionSize, bool dymaicDraw);
 
-	void AppendData(const T* data, uint count);
-	void UpdateData(const T* data, uint offset, uint count);
-	void InsertData(const T* data, uint offset, uint count);
+	void Append(const T* data, uint count);
+	void UpdateData(const T* data, uint count, uint index);
+	void InsertData(const T* data, uint count, uint index);
 
 	void Bind() const;
 	void UnBind() const;
@@ -31,24 +34,25 @@ private:
 	void WriteData(const T* data, uint offset, uint count, bool update);
 
 	uint rendererID;
-	uint currentCount;
+	uint count;
 	uint alloctionSize;
-	mutable bool isBind;
+	static uint bindID;
 };
 
 template<typename T>
+uint  VertexBuffer<T>::bindID = INVALID_ID;
+
+template<typename T>
 inline VertexBuffer<T>::VertexBuffer(): 
-currentCount(0), alloctionSize(0), 
-isBind(false),rendererID(0xDEADBF)
+count(0), alloctionSize(0), rendererID(INVALID_ID)
 {
 }
 
 template<typename T>
 inline void VertexBuffer<T>::Init(const T* data, uint count, uint alloctionSize, bool dynamicDraw)
 {
-	this->currentCount = count;
+	this->count = count;
 	this->alloctionSize = alloctionSize;
-	this->isBind = false;
 
 	GLCall(glGenBuffers(1, &rendererID));
 	GLCall(glBindBuffer(GL_ARRAY_BUFFER, rendererID));
@@ -57,68 +61,68 @@ inline void VertexBuffer<T>::Init(const T* data, uint count, uint alloctionSize,
 }
 
 template<typename T>
-inline void VertexBuffer<T>::AppendData(const T* data, uint count)
+inline void VertexBuffer<T>::Append(const T* data, uint count)
 {
-	WriteData(data, currentCount, count, false);
+	WriteData(data, count,this->count, false);
 }
 
 template<typename T>
-void VertexBuffer<T>::InsertData(const T* data, uint offset, uint count)
+void VertexBuffer<T>::InsertData(const T* data, uint count, uint index)
 {
-	WriteData(data, offset, count, false);
+	WriteData(data, count,index, false);
 }
 
 template<typename T>
-void VertexBuffer<T>::UpdateData(const T* data, uint offset, uint count)
+void VertexBuffer<T>::UpdateData(const T* data, uint count, uint index)
 {
-	WriteData(data, offset, count, true);
+	WriteData(data, count, index, true);
 }
 
 template<typename T>
 void VertexBuffer<T>::Bind() const
 {
-	if (!isBind)
+	if (rendererID != bindID)
 	{
 		GLCall(glBindBuffer(GL_ARRAY_BUFFER, rendererID));
-		isBind = true;
+		bindID = rendererID;
 	}
 }
 
 template<typename T>
 void VertexBuffer<T>::UnBind() const
 {
-	if (isBind)
+	if (rendererID == bindID)
 	{
 		GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
-		isBind = false;
+		bindID = INVALID_ID;
 	}
 }
 
 template<typename T>
 inline uint VertexBuffer<T>::GetCount() const
 {
-	return currentCount;
+	return count;
 }
 
 
 template<typename T>
-inline void VertexBuffer<T>::WriteData(const T* data, uint offset, uint count, bool update)
+inline void VertexBuffer<T>::WriteData(const T* data, uint count, uint index, bool update)
 {
 	Bind();
 	GLCall(T* gData = (T*)glMapBuffer(GL_ARRAY_BUFFER, GL_READ_WRITE));
 
 	if (update)
-		memcpy(&gData[offset], data, sizeof(T) * count);
+		memcpy(&gData[index], data, sizeof(T) * count);
 
 	else
 	{
-		if ((currentCount + count) * sizeof(T) > alloctionSize)
+		if ((this->count + count) * sizeof(T) > alloctionSize)
 			std::cout << "Error trying to append new data to out of bound vertex" << std::endl;
 
 		else
 		{
-			memcpy(&gData[currentCount], data, sizeof(T) * count);
-			currentCount += count;
+			memcpy(&gData[this->count], data, sizeof(T) * count);
+			this->count += count;
 		}
 	}
 	GLCall(glUnmapBuffer(GL_ARRAY_BUFFER));

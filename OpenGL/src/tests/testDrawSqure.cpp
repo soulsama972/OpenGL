@@ -17,7 +17,7 @@ unsigned int indices[] =
 
 
 
-TestDrawSqure::TestDrawSqure() :color { 255.0f, 255.0f, 255.0f, 255.0f }
+TestDrawSqure::TestDrawSqure() :color{ 255.0f, 255.0f, 255.0f, 255.0f }
 {
 	memcpy(temp.pos, pos, sizeof(temp));
 	index = 0;
@@ -35,10 +35,10 @@ TestDrawSqure::~TestDrawSqure()
 
 void TestDrawSqure::OnRender()
 {
-	mesh.Bind();
+
 	shader->Bind();
 	shader->SetUniform4f("u_Color", color[0], color[1], color[2], color[3]);
-	renderer.Draw(mesh.GetVertexArray(), mesh.GetIndexBuffer(), mesh.GetVertexBuffer(), *shader);
+	mesh.Draw();
 }
 
 void TestDrawSqure::OnImGuiRender()
@@ -63,11 +63,10 @@ void TestDrawSqure::OnImGuiRender()
 
 void TestDrawSqure::AddSqure()
 {
-	mesh.GetVertexBuffer().AppendData((v*)& pos, 1);
-	mesh.GetIndexBuffer().Append(indices, 6);
+	mesh.Append((v*)&pos, 4, indices, 6);
 }
 
 void TestDrawSqure::UpdateSqure()
 {
-	mesh.GetVertexBuffer().UpdateData(&temp, index, 1);
+	mesh.UpdateData(&temp, 4, index);
 }

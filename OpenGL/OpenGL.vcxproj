@@ -15,6 +15,11 @@
     <ClCompile Include="src\cpp\shader.cpp" />
     <ClCompile Include="src\cpp\indexBuffer.cpp" />
     <ClCompile Include="src\cpp\renderer.cpp" />
+    <ClCompile Include="src\cpp\model.cpp" />
+    <ClCompile Include="src\cpp\camera.cpp" />
+    <ClCompile Include="src\cpp\window.cpp" />
+    <ClCompile Include="src\cpp\input.cpp" />
+    <ClCompile Include="src\cpp\timer.cpp" />
     <ClCompile Include="src\tests\testClearColor.cpp" />
     <ClCompile Include="src\tests\testDrawModel.cpp" />
     <ClCompile Include="src\tests\testTextrue.cpp" />
@@ -176,10 +181,15 @@
     <None Include="src\vendor\glm\gtx\wrap.inl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\headers\input.h" />
     <ClInclude Include="src\headers\mesh.h" />
+    <ClInclude Include="src\headers\model.h" />
     <ClInclude Include="src\headers\shader.h" />
     <ClInclude Include="src\headers\indexBuffer.h" />
     <ClInclude Include="src\headers\renderer.h" />
+    <ClInclude Include="src\headers\camera.h" />
+    <ClInclude Include="src\headers\timer.h" />
+    <ClInclude Include="src\headers\window.h" />
     <ClInclude Include="src\tests\testClearColor.h" />
     <ClInclude Include="src\tests\testDrawModel.h" />
     <ClInclude Include="src\tests\testTextrue.h" />

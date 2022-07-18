@@ -13,6 +13,8 @@
                   ASSERT(GLLogCall(#x, __FILE__, __LINE__))
 #endif
 
+#define INVALID_ID  0xDEADBEF
+
 inline void GLClearError()
 {
     while (glGetError() != GL_NO_ERROR);

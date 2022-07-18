@@ -1,29 +1,35 @@
 #include "vertexArray.h"
 
-VertexArray::VertexArray(): isBind(false)
+uint VertexArray::bindID = INVALID_ID;
+
+VertexArray::VertexArray()
 {
 	GLCall(glGenVertexArrays(1, &rendererID));
 }
 
 VertexArray::~VertexArray()
 {
-	GLCall(glDeleteVertexArrays(1,&rendererID));
+	if (rendererID != INVALID_ID)
+	{
+		UnBind();
+		GLCall(glDeleteVertexArrays(1, &rendererID));
+	}
 }
 
 void VertexArray::Bind()const
 {
-	if (!isBind)
+	if (bindID != rendererID)
 	{
 		GLCall(glBindVertexArray(rendererID));
+		bindID = rendererID;
 	}
-	isBind = true;
 }
 
 void VertexArray::UnBind() const
 {
-	if (isBind)
+	if (bindID == rendererID)
 	{
 		GLCall(glBindVertexArray(0));
+		bindID = INVALID_ID;
 	}
-	isBind = false;
 }

@@ -17,14 +17,14 @@ public:
 
 	inline uint GetCount() const 
 	{ 
-		return this->currentCount; 
+		return this->count; 
 	}
 
 
 private:
 	uint rendererID;
-	uint currentCount;
+	uint count;
 	uint alloctionSize;
-	mutable bool isBind;
+	static uint bindID;
 };
 
