@@ -2,6 +2,7 @@
 #include"typing.h"
 #include"input.h"
 #include"timer.h"
+#include"mouse.h"
 // gl
 #include<GL/glew.h>
 #include<GLFW/glfw3.h>
@@ -13,7 +14,7 @@
 
 
 
-class Window 
+class Window : public Event
 {
 public:
 	Window();
@@ -24,15 +25,20 @@ public:
 	
 	void SetTitle(const std::string& title) const;
 	
+	void HideCursor() const;
+	
+	void ShowCurosr() const;
+
+
+
 	bool IsDestoryed() const;
 	
 	void Present() const;
 	
-	Input input;
 	Timer timer;
 
-private:
 	GLFWwindow* window;
+private:
 	uint screenWidth;
 	uint screenHeight;
 

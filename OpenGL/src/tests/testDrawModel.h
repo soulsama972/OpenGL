@@ -16,9 +16,13 @@ public:
 	void OnUpdate(float deltaTime) override;
 	void processInput(float deltaTime);
 
+	void MouseEvent(float x, float y, MouseButton mType, MouseState mState) override;
+
 private:
 	Model model;
 	Shader* shader;
 	glm::mat4 proj;
 	Camera camera;
+	Timer timer;
+	float zoom;
 };

@@ -3,7 +3,8 @@
 
 Timer::Timer() : count(0),lastFPS(0), delta(0.0f)
 {
-    start = std::chrono::high_resolution_clock::now();
+    end = start = std::chrono::high_resolution_clock::now();
+
 }
 
 void Timer::Init()

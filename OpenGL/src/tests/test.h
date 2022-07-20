@@ -2,6 +2,9 @@
 
 #include"mesh.h"
 #include"input.h"
+#include"mouse.h"
+#include"event.h"
+#include"timer.h"
 #include"shader.h"
 #include"textrue.h"
 #include"renderer.h"
@@ -9,6 +12,7 @@
 #include"indexBuffer.h"
 #include"vertexBuffer.h"
 #include"vertexBufferLayout.h"
+
 
 // imgui
 #include"imgui/imgui.h"
@@ -19,7 +23,8 @@
 #include"glm/glm.hpp"
 #include"glm/gtc/matrix_transform.hpp"
 
-class Test
+
+class Test : public Event
 {
 public:
 	Test(): isBegin(false) {}
@@ -35,6 +40,7 @@ public:
 		ImGui::NewFrame();
 
 	}
+	
 	inline void ImGuiEnd() const
 	{
 		ImGui::Render();
@@ -42,9 +48,7 @@ public:
 	}
 
 protected:
-
 	Renderer renderer;
-
 private:
 	bool isBegin;
 };

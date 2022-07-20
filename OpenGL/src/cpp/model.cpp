@@ -133,8 +133,7 @@ void Model::ProcessMesh(const aiMesh* mesh, const aiScene* scene, const VertexBu
     loadMaterialTextures(material, aiTextureType_HEIGHT, "texture_normal", baseDir);
     loadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height", baseDir);
 
-   
-    meshes.push_back(new Mesh(vertices.data(), vertices.size(), indices.data(), indices.size(), layout, vertices.size(), vertices.size(), 1, false));
+    meshes.push_back(new Mesh(vertices.data(), static_cast<uint>(vertices.size()), indices.data(), static_cast<uint>(indices.size()), layout, static_cast<uint>(vertices.size()),static_cast<uint>( vertices.size()), 1, false));
 }
 
 void Model::loadMaterialTextures(const aiMaterial* mat, const aiTextureType& type, const std::string& typeName, const std::string& baseDir)

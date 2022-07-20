@@ -27,6 +27,7 @@
     <ClCompile Include="src\cpp\window.cpp" />
     <ClCompile Include="src\cpp\input.cpp" />
     <ClCompile Include="src\cpp\timer.cpp" />
+    <ClCompile Include="src\cpp\mouse.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\basic.shader" />
@@ -483,6 +484,8 @@
     <ClInclude Include="src\headers\window.h" />
     <ClInclude Include="src\headers\input.h" />
     <ClInclude Include="src\headers\timer.h" />
+    <ClInclude Include="src\headers\mouse.h" />
+    <ClInclude Include="src\headers\event.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="src\vendor\glm\CMakeLists.txt" />

@@ -20,6 +20,7 @@
     <ClCompile Include="src\cpp\window.cpp" />
     <ClCompile Include="src\cpp\input.cpp" />
     <ClCompile Include="src\cpp\timer.cpp" />
+    <ClCompile Include="src\cpp\mouse.cpp" />
     <ClCompile Include="src\tests\testClearColor.cpp" />
     <ClCompile Include="src\tests\testDrawModel.cpp" />
     <ClCompile Include="src\tests\testTextrue.cpp" />
@@ -181,9 +182,11 @@
     <None Include="src\vendor\glm\gtx\wrap.inl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\headers\event.h" />
     <ClInclude Include="src\headers\input.h" />
     <ClInclude Include="src\headers\mesh.h" />
     <ClInclude Include="src\headers\model.h" />
+    <ClInclude Include="src\headers\mouse.h" />
     <ClInclude Include="src\headers\shader.h" />
     <ClInclude Include="src\headers\indexBuffer.h" />
     <ClInclude Include="src\headers\renderer.h" />
@@ -546,6 +549,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLFW;$(SolutionDir)Dependencies\glew-2.1.0\lib\Release\x64;$(SolutionDir)Dependencies\assimp</AdditionalLibraryDirectories>
       <AdditionalDependencies>assimp-vc142-mtd.lib;glfw3.lib;opengl32.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
