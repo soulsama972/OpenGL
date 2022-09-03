@@ -1,11 +1,12 @@
 #include "testDrawModel.h"
 #include"window.h"
 extern Window window;
+glm::vec3 testUp = { 0,0,0 };
 TestDrawModel::TestDrawModel() :zoom(45.0f)
 {
     shader = new Shader("res/shaders/testDrawModel.shader");
 	std::string baseDir = "./res/models/gun";
-	model.Init(baseDir + "/Gun.obj", baseDir);
+	model.Init(baseDir + "/gun.obj", baseDir);
 	
 	proj = glm::perspective(glm::radians(zoom), 4.0f/3.0f, 0.1f, 1000.0f);
 	//proj = glm::ortho(0.0f,1920.0f,0.0f,1080.0f, 0.1f, 1000.0f);
@@ -32,9 +33,9 @@ TestDrawModel::~TestDrawModel()
 void TestDrawModel::OnRender()
 {
 	shader->Bind();
-	auto s = glm::scale(glm::mat4(1.0f), { 100, 100,100 });
+	auto s = glm::scale(glm::mat4(1.0f), { 1, 1,1 });
 	auto t = glm::translate(glm::mat4(1.0f), { 0, 0,0 });
-	//auto r = glm::rotate(glm::mat4(1.0f),180.f, { 0.0f, 0.0f, 0.0f });
+	//auto r = glm::rotate(glm::mat4(1.0f),90.f, { 0.0f, 1zz.0f, 0.0f });
 	auto r = glm::mat4(1.0f);
 	glm::mat4 m = t * r * s;
 	shader->SetUniformMat4f("u_MVP", proj * camera.GetViewMatrix() * m);
@@ -46,6 +47,11 @@ void TestDrawModel::OnImGuiRender()
 {	
 	if(ImGui::SliderFloat3("camera.Position.x", &camera.pos.x, -360.0f, 360.0f))
 		camera.updateCameraVectors();
+
+	if (ImGui::SliderFloat3("1", &testUp.x, -1.0f, 1.0f))
+	{
+		camera = Camera(camera.pos, testUp);
+	}
 }
 
 void TestDrawModel::OnUpdate(float deltaTime)

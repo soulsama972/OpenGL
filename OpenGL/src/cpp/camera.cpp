@@ -1,14 +1,15 @@
 #include "camera.h"
 
+constexpr auto radians = 0.01745329251994329576923690768489;
 
 Camera::Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch):
-    Front(glm::vec3(0.0f, 0.0f, 0.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY),yaw(yaw),pitch(pitch), up(up),pos(position)
+    front(glm::vec3(0.0f, 0.0f, 0.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY),yaw(yaw),pitch(pitch), up(up),pos(position)
 {
     updateCameraVectors();
 }
 
 Camera::Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch):
-Front(glm::vec3(0.0f, 0.0f, 0.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY)
+front(glm::vec3(0.0f, 0.0f, 0.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY)
 {
     pos = glm::vec3(posX, posY, posZ);
     up = glm::vec3(upX, upY, upZ);
@@ -22,13 +23,13 @@ void Camera::ProcessKeyboard(Camera_Movement direction, float deltaTime)
 {
     float velocity = MovementSpeed * deltaTime;
     if (direction == FORWARD)
-        pos += Front * velocity;
+        pos += front * velocity;
     if (direction == BACKWARD)
-        pos -= Front * velocity;
+        pos -= front * velocity;
     if (direction == LEFT)
-        pos -= Right * velocity;
+        pos -= right * velocity;
     if (direction == RIGHT)
-        pos += Right * velocity;
+        pos += right * velocity;
 
     updateCameraVectors();
 }
@@ -58,13 +59,12 @@ void Camera::ProcessMouseMovement(float xoffset, float yoffset, bool constrainPi
 
 void Camera::updateCameraVectors()
 {
+    front.x = cos(radians *yaw) * cos(radians * pitch);
+    front.y = sin(radians * pitch);
+    front.z = sin(radians * yaw) * cos(radians *pitch);
 
-    Front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-    Front.y = sin(glm::radians(pitch));
-    Front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+    front = glm::normalize(front);
+    right = glm::normalize(glm::cross(front, up)); 
 
-    Front = glm::normalize(Front);
-    Right = glm::normalize(glm::cross(Front, up));  // normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.
-
-    view = glm::lookAtRH(pos, pos + Front, glm::normalize(glm::cross(Right, Front)));
+    view = glm::lookAtRH(pos, pos + front, glm::normalize(glm::cross(right, front)));
 }

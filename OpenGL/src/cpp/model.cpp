@@ -114,6 +114,11 @@ void Model::ProcessMesh(const aiMesh* mesh, const aiScene* scene, const VertexBu
         else
             vertex.t = glm::vec2(0.0f, 0.0f);
 
+        if (mesh->HasBones())
+        {
+            int x = 1;
+        }
+
         vertices.push_back(vertex);
     }
     // now wak through each of the mesh's faces (a face is a mesh its triangle) and retrieve the corresponding vertex indices.

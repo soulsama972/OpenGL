@@ -75,7 +75,16 @@ template<typename T>
 inline void Mesh<T>::Draw() const
 {
 	Bind();
-	GLCall(glDrawElements(GL_TRIANGLES, ib.GetCount(), GL_UNSIGNED_INT, nullptr));
+	uint indicesCount = ib.GetCount();
+	uint verticesCount = vb.GetCount();
+	if (indicesCount && indicesCount != verticesCount)
+	{
+		GLCall(glDrawElements(GL_TRIANGLES, indicesCount, GL_UNSIGNED_INT, nullptr));
+	}
+	else if (verticesCount)
+	{
+		GLCall(glDrawArrays(GL_TRIANGLES, 0, verticesCount));
+	}
 
 }
 

@@ -10,7 +10,7 @@
 Window window;
 int main(void)
 {
-    window.Init(1920, 1080, "test title");
+    window.Init(1920, 1080, "title");
     Renderer renderer;
     Test* currentTest = nullptr;
     TestMenu menu(currentTest);
@@ -28,7 +28,7 @@ int main(void)
     while (!window.IsDestoryed())
     {
         window.timer.Tick();
-        renderer.Clear();
+        renderer.Clear(0,0.5,0.5,0.5);
         currentTest->ImGuiBegin();
 
         if (currentTest)

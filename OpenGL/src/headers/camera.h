@@ -13,7 +13,7 @@ enum Camera_Movement {
 // Default camera values
 constexpr float YAW = 0.0f;
 constexpr float PITCH = 0.0f;
-constexpr float SPEED = 5.0f;
+constexpr float SPEED = 10.0f;
 constexpr float SENSITIVITY = 0.1f;
 constexpr float ZOOM = 0.0f;
 
@@ -39,8 +39,8 @@ public:
     glm::vec3 pos;
 private:
     // camera Attributes
-    glm::vec3 Front;
-    glm::vec3 Right;
+    glm::vec3 front;
+    glm::vec3 right;
     glm::vec3 up;
     glm::mat4 view;
     // euler Angles
