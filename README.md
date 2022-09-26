@@ -15,4 +15,6 @@ A WIP wrapper to OpenGL. At the moment you can use this wrapper to draw shapes, 
   - [ ] Load resources
   
 ## Example
+Demonstrating the unitests of the wrapper for drawing shapes, 3D models (of a gun in this case) and changing shapes/background color
+
 <img src="OpenGL_Wrapper.gif" width="70%" height="50%" />
