@@ -15,3 +15,4 @@ A WIP wrapper to OpenGL. At the moment you can use this wrapper to draw shapes, 
   - [ ] Load resources
   
 ## Example
+<img src="OpenGL_Wrapper.gif" width="70%" height="50%" />
